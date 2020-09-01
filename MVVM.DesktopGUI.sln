@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.DesktopGUI", "MVVM.DesktopGUI\MVVM.DesktopGUI.csproj", "{DA9696D1-13A7-4360-8731-6944149F2CC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.DesktopGUI", "MVVM.DesktopGUI\MVVM.DesktopGUI.csproj", "{DA9696D1-13A7-4360-8731-6944149F2CC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.DataAccess", "MVVM.DataAccess\MVVM.DataAccess.csproj", "{D87F8D2E-7616-4F57-8959-F0727121CAE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.DataAccess", "MVVM.DataAccess\MVVM.DataAccess.csproj", "{D87F8D2E-7616-4F57-8959-F0727121CAE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.DataAccess.Entities", "MVVM.DataAccess.Entities\MVVM.DataAccess.Entities.csproj", "{E0FCAFFB-337E-4C8F-A396-194BE1159F26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.DataAccess.Entities", "MVVM.DataAccess.Entities\MVVM.DataAccess.Entities.csproj", "{E0FCAFFB-337E-4C8F-A396-194BE1159F26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.Tests", "MVVM.Tests\MVVM.Tests.csproj", "{6ACC35EE-3C82-4E82-A43A-7E888E035ADA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.Tests", "MVVM.Tests\MVVM.Tests.csproj", "{6ACC35EE-3C82-4E82-A43A-7E888E035ADA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.Entities", "MVVM.Entities\MVVM.Entities.csproj", "{32FCBE33-38B2-43DA-8D9E-673730EEAEAC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.Utilities", "MVVM.Utilities\MVVM.Utilities.csproj", "{1C50E10A-6F67-49D6-99BD-C779EE2F6E02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.Utilities", "MVVM.Utilities\MVVM.Utilities.csproj", "{1C50E10A-6F67-49D6-99BD-C779EE2F6E02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{6ACC35EE-3C82-4E82-A43A-7E888E035ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ACC35EE-3C82-4E82-A43A-7E888E035ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ACC35EE-3C82-4E82-A43A-7E888E035ADA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{32FCBE33-38B2-43DA-8D9E-673730EEAEAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{32FCBE33-38B2-43DA-8D9E-673730EEAEAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{32FCBE33-38B2-43DA-8D9E-673730EEAEAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{32FCBE33-38B2-43DA-8D9E-673730EEAEAC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1C50E10A-6F67-49D6-99BD-C779EE2F6E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1C50E10A-6F67-49D6-99BD-C779EE2F6E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C50E10A-6F67-49D6-99BD-C779EE2F6E02}.Release|Any CPU.ActiveCfg = Release|Any CPU

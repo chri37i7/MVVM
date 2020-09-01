@@ -26,7 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MVVM.DataAccess.Entities\MVVM.DataAccess.Entities.csproj" />
     <ProjectReference Include="..\MVVM.DataAccess\MVVM.DataAccess.csproj" />
-    <ProjectReference Include="..\MVVM.Entities\MVVM.Entities.csproj" />
     <ProjectReference Include="..\MVVM.Utilities\MVVM.Utilities.csproj" />
   </ItemGroup>
 

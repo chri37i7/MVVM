@@ -1,7 +1,7 @@
 ﻿using MVVM.DataAccess.Base;
 using MVVM.DataAccess.Entities.Models;
 
-namespace MVVM.Entities
+namespace MVVM.DataAccess.Factory
 {
     public class RepositoryFactory<TRepository, TEntity>
         where TRepository : IRepositoryBase<TEntity>, new()
