@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.Tests", "MVVM.Tests\MV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.Utilities", "MVVM.Utilities\MVVM.Utilities.csproj", "{1C50E10A-6F67-49D6-99BD-C779EE2F6E02}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.Entities", "MVVM.Entities\MVVM.Entities.csproj", "{63E295FB-EC28-4A5B-88F3-A50CB6AF3952}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{1C50E10A-6F67-49D6-99BD-C779EE2F6E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C50E10A-6F67-49D6-99BD-C779EE2F6E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C50E10A-6F67-49D6-99BD-C779EE2F6E02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E295FB-EC28-4A5B-88F3-A50CB6AF3952}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E295FB-EC28-4A5B-88F3-A50CB6AF3952}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E295FB-EC28-4A5B-88F3-A50CB6AF3952}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E295FB-EC28-4A5B-88F3-A50CB6AF3952}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

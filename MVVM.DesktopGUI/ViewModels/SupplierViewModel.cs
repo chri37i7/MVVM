@@ -2,6 +2,7 @@
 using MVVM.DataAccess.Entities.Models;
 using MVVM.DataAccess.Factory;
 using MVVM.Utilities;
+
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -22,14 +23,17 @@ namespace MVVM.DesktopGUI.ViewModels
         #endregion
 
         #region Constructors
-        public SupplierViewModel() { }
+        public SupplierViewModel()
+        {
+            Suppliers = new ObservableCollection<Supplier>();
+        }
         #endregion
 
         #region Properties
         /// <summary>
         /// Suppliers displayed in the view
         /// </summary>
-        ObservableCollection<Supplier> Suppliers
+        public virtual ObservableCollection<Supplier> Suppliers
         {
             get
             {
@@ -41,8 +45,6 @@ namespace MVVM.DesktopGUI.ViewModels
                 {
                     suppliers = value;
 
-                    // Raise ProperyChanged Event
-                    NotifyPropertyChanged(nameof(Suppliers));
                 }
             }
         }
@@ -63,36 +65,48 @@ namespace MVVM.DesktopGUI.ViewModels
                     selectedSupplier = value;
 
                     // Raise ProperyChanged Event
-                    NotifyPropertyChanged(nameof(SelectedSupplier));
+                    OnPropertyChanged(nameof(SelectedSupplier));
                 }
             }
         }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Initializes <see cref="Suppliers"/>
+        /// </summary>
         public virtual void Initialize()
         {
             // Load suppliers
             LoadAllSuppliers();
         }
 
-        public virtual void LoadAllSuppliers()
+        /// <summary>
+        /// 
+        /// </summary>
+        protected virtual void LoadAllSuppliers()
         {
             // Create Factory
-            RepositoryFactory<SupplierRepository, Supplier> factory = new RepositoryFactory<SupplierRepository, Supplier>();
+            RepositoryFactory<SupplierRepository, Supplier> factory = 
+                new RepositoryFactory<SupplierRepository, Supplier>();
+
             // Create Repository
             SupplierRepository supplierRepository = factory.Create();
             // Get All
             IEnumerable<Supplier> suppliers = supplierRepository.GetAll();
+
             // Replace Observable Collection
             Suppliers.ReplaceWith(suppliers);
         }
 
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            // Invoke event, to trigger a view update
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        } 
+        }
         #endregion
     }
 }
