@@ -9,9 +9,8 @@ namespace MVVM.Entities
     /// <typeparam name="T"></typeparam>
     public class CommandBase<T> : ICommand
     {
-
-        Action<T> _TargetExecuteMethod;
-        Func<T, bool> _TargetCanExecuteMethod;
+        readonly Action<T> _TargetExecuteMethod;
+        readonly Func<T, bool> _TargetCanExecuteMethod;
 
         public CommandBase(Action<T> executeMethod)
         {
@@ -55,10 +54,7 @@ namespace MVVM.Entities
 
         void ICommand.Execute(object parameter)
         {
-            if(_TargetExecuteMethod != null)
-            {
-                _TargetExecuteMethod((T)parameter);
-            }
+            _TargetExecuteMethod?.Invoke((T)parameter);
         }
         #endregion
     }

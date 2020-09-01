@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MVVM.DesktopGUI.ViewModels.Base
 {
@@ -17,18 +18,18 @@ namespace MVVM.DesktopGUI.ViewModels.Base
     {
         #region Methods
         /// <summary>
-        /// Runs the <see cref="LoadAll"/> method
+        /// Runs the <see cref="LoadAllAsync"/> method
         /// </summary>
-        public virtual void Initialize()
+        public virtual async Task Initialize()
         {
             // Load suppliers
-            LoadAll();
+            await LoadAllAsync();
         }
 
         /// <summary>
         /// Loads data from the database
         /// </summary>
-        protected virtual void LoadAll()
+        protected virtual Task LoadAllAsync()
         {
             throw new NotImplementedException();
         }

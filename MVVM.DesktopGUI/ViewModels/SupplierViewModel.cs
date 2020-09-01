@@ -3,8 +3,10 @@ using MVVM.DataAccess.Entities.Models;
 using MVVM.DataAccess.Factory;
 using MVVM.DesktopGUI.ViewModels.Base;
 using MVVM.Utilities;
+
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace MVVM.DesktopGUI.ViewModels
 {
@@ -71,16 +73,24 @@ namespace MVVM.DesktopGUI.ViewModels
         /// <summary>
         /// Loads all suppliers from the database
         /// </summary>
-        protected override void LoadAll()
+        protected override async Task LoadAllAsync()
         {
             // Create Factory
-            RepositoryFactory<SupplierRepository, Supplier> factory = 
+            RepositoryFactory<SupplierRepository, Supplier> factory =
                 new RepositoryFactory<SupplierRepository, Supplier>();
 
             // Create Repository
             SupplierRepository supplierRepository = factory.Create();
-            // Get All
-            IEnumerable<Supplier> suppliers = supplierRepository.GetAll();
+
+            // Declare variable for storing products
+            IEnumerable<Supplier> suppliers = null;
+
+            // Run GetAll on a seperate thread
+            await Task.Run(() =>
+            {
+                // Get all products from the database
+                suppliers = supplierRepository.GetAll();
+            });
 
             // Replace Observable Collection
             Suppliers.ReplaceWith(suppliers);

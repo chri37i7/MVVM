@@ -29,10 +29,10 @@ namespace MVVM.DesktopGUI.UserControls
             productViewModel = new ProductViewModel();
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private async void OnLoaded(object sender, RoutedEventArgs e)
         {
 
-            productViewModel.Initialize();
+            await productViewModel.Initialize();
 
             DataContext = productViewModel;
         }

@@ -55,14 +55,12 @@ namespace MVVM.DesktopGUI.ViewModels
         /// <param name="destination"></param>
         private void OnNav(string destination)
         {
-
             switch(destination)
             {
                 case "suppliers":
                     CurrentViewModel = supplierViewModel;
                     break;
                 case "products":
-                default:
                     CurrentViewModel = productViewModel;
                     break;
             }

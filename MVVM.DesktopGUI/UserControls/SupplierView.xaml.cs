@@ -29,10 +29,10 @@ namespace MVVM.DesktopGUI.UserControls
             supplierViewModel = new SupplierViewModel();
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private async void OnLoaded(object sender, RoutedEventArgs e)
         {
 
-            supplierViewModel.Initialize();
+            await supplierViewModel.Initialize();
 
             DataContext = supplierViewModel;
         }
