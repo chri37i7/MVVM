@@ -3,6 +3,10 @@ using System.Windows.Input;
 
 namespace MVVM.Entities
 {
+    /// <summary>
+    /// Base command class implementing the ICommand interface
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class CommandBase<T> : ICommand
     {
 
@@ -46,7 +50,6 @@ namespace MVVM.Entities
 
         // Beware - should use weak references if command instance lifetime is
         // longer than lifetime of UI objects that get hooked up to command
-    
         // Prism commands solve this in their implementation 
         public event EventHandler CanExecuteChanged = delegate { };
 
@@ -57,7 +60,6 @@ namespace MVVM.Entities
                 _TargetExecuteMethod((T)parameter);
             }
         }
-
         #endregion
     }
 }

@@ -8,26 +8,51 @@ namespace MVVM.DesktopGUI.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
+        #region Fields
+        private readonly SupplierViewModel supplierViewModel;
+        private readonly ProductViewModel productViewModel;
+        private BindableBase currentViewModel;
+        #endregion
 
+        #region Constructors
         public MainWindowViewModel()
         {
+            // Initialize ViewModels
+            supplierViewModel = new SupplierViewModel();
+            productViewModel = new ProductViewModel();
+
+            // Initialize Command
             NavCommand = new CommandBase<string>(OnNav);
         }
+        #endregion
 
-        private SupplierViewModel supplierViewModel = new SupplierViewModel();
-
-        private ProductViewModel productViewModel= new ProductViewModel();
-
-        private BindableBase _CurrentViewModel;
-
-        public BindableBase CurrentViewModel
+        #region Properties
+        /// <summary>
+        /// The currently displayer ViewModel
+        /// </summary>
+        public virtual BindableBase CurrentViewModel
         {
-            get { return _CurrentViewModel; }
-            set { SetProperty(ref _CurrentViewModel, value); }
+            get
+            {
+                return currentViewModel;
+            }
+            set
+            {
+                SetProperty(ref currentViewModel, value);
+            }
         }
 
-        public CommandBase<string> NavCommand { get; private set; }
+        /// <summary>
+        /// Command to navigate between ViewModels
+        /// </summary>
+        public virtual CommandBase<string> NavCommand { get; private set; }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Navigation Method used by <see cref="NavCommand"/>
+        /// </summary>
+        /// <param name="destination"></param>
         private void OnNav(string destination)
         {
 
@@ -41,6 +66,7 @@ namespace MVVM.DesktopGUI.ViewModels
                     CurrentViewModel = productViewModel;
                     break;
             }
-        }
+        } 
+        #endregion
     }
 }
