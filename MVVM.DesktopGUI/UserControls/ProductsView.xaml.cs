@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MVVM.DesktopGUI.ViewModels;
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,9 +20,21 @@ namespace MVVM.DesktopGUI.UserControls
     /// </summary>
     public partial class ProductsView : UserControl
     {
+        readonly ProductViewModel productViewModel;
+
         public ProductsView()
         {
             InitializeComponent();
+
+            productViewModel = new ProductViewModel();
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+
+            productViewModel.Initialize();
+
+            DataContext = productViewModel;
         }
     }
 }

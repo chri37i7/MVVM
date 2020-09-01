@@ -1,21 +1,16 @@
 ﻿using MVVM.DataAccess;
 using MVVM.DataAccess.Entities.Models;
 using MVVM.DataAccess.Factory;
+using MVVM.DesktopGUI.ViewModels.Base;
 using MVVM.Utilities;
-
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace MVVM.DesktopGUI.ViewModels
 {
-    public class SupplierViewModel : INotifyPropertyChanged
+    public class SupplierViewModel : ViewModelBase
     {
         #region Fields
-        // Property Changed Event
-        public event PropertyChangedEventHandler PropertyChanged;
-
         // Observable Collection
         private ObservableCollection<Supplier> suppliers;
         // Selected Supplier
@@ -23,6 +18,7 @@ namespace MVVM.DesktopGUI.ViewModels
         #endregion
 
         #region Constructors
+        // Constructor
         public SupplierViewModel()
         {
             Suppliers = new ObservableCollection<Supplier>();
@@ -73,18 +69,9 @@ namespace MVVM.DesktopGUI.ViewModels
 
         #region Methods
         /// <summary>
-        /// Initializes <see cref="Suppliers"/>
+        /// Loads all suppliers from the database
         /// </summary>
-        public virtual void Initialize()
-        {
-            // Load suppliers
-            LoadAllSuppliers();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected virtual void LoadAllSuppliers()
+        protected override void LoadAll()
         {
             // Create Factory
             RepositoryFactory<SupplierRepository, Supplier> factory = 
@@ -97,15 +84,6 @@ namespace MVVM.DesktopGUI.ViewModels
 
             // Replace Observable Collection
             Suppliers.ReplaceWith(suppliers);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="propertyName"></param>
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

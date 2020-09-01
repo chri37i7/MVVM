@@ -1,4 +1,5 @@
 ﻿using MVVM.Entities;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,14 +16,14 @@ namespace MVVM.DesktopGUI.ViewModels
 
         private SupplierViewModel supplierViewModel = new SupplierViewModel();
 
-        private ProductViewModel productViewModel = new ProductViewModel();
+        private ProductViewModel productViewModel= new ProductViewModel();
 
-        private BindableBase currentViewModel;
+        private BindableBase _CurrentViewModel;
 
         public BindableBase CurrentViewModel
         {
-            get { return currentViewModel; }
-            set { SetProperty(ref currentViewModel, value); }
+            get { return _CurrentViewModel; }
+            set { SetProperty(ref _CurrentViewModel, value); }
         }
 
         public CommandBase<string> NavCommand { get; private set; }
@@ -30,16 +31,16 @@ namespace MVVM.DesktopGUI.ViewModels
         private void OnNav(string destination)
         {
 
-            //switch(destination)
-            //{
-            //    case "supplier":
-            //        CurrentViewModel = supplierViewModel;
-            //        break;
-            //    case "product":
-            //    default:
-            //        CurrentViewModel = productViewModel;
-            //        break;
-            //}
+            switch(destination)
+            {
+                case "suppliers":
+                    CurrentViewModel = supplierViewModel;
+                    break;
+                case "products":
+                default:
+                    CurrentViewModel = productViewModel;
+                    break;
+            }
         }
     }
 }

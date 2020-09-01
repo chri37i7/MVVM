@@ -1,25 +1,90 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using MVVM.DataAccess.Base;
+using MVVM.DataAccess.Entities.Models;
+using MVVM.DataAccess.Factory;
+using MVVM.DesktopGUI.ViewModels.Base;
+using MVVM.Utilities;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MVVM.DesktopGUI.ViewModels
 {
-    public class ProductViewModel : INotifyPropertyChanged
+    public class ProductViewModel : ViewModelBase
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region Fields
+        // Observable Collection
+        private ObservableCollection<Product> products;
+        // Selected Product
+        private Product selectedProduct;
+        #endregion
 
+        #region Constructors
+        // Constructor
         public ProductViewModel()
         {
-
+            Products = new ObservableCollection<Product>();
         }
+        #endregion
 
-        public void Initialize()
+        #region Properties
+        /// <summary>
+        /// Suppliers displayed in the view
+        /// </summary>
+        public virtual ObservableCollection<Product> Products
         {
+            get
+            {
+                return products;
+            }
+            set
+            {
+                if(products != value)
+                {
+                    products = value;
 
+                }
+            }
         }
 
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        /// <summary>
+        /// The selected supplier in the view
+        /// </summary>
+        public virtual Product SelectedProduct
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            get
+            {
+                return selectedProduct;
+            }
+            set
+            {
+                if(selectedProduct != value)
+                {
+                    selectedProduct = value;
+
+                    // Raise ProperyChanged Event
+                    OnPropertyChanged(nameof(SelectedProduct));
+                }
+            }
         }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Loads all suppliers from the database
+        /// </summary>
+        protected override void LoadAll()
+        {
+            // Create Factory
+            RepositoryFactory<RepositoryBase<Product>, Product> factory =
+                new RepositoryFactory<RepositoryBase<Product>, Product>();
+
+            // Create Repository
+            RepositoryBase<Product> productRepository = factory.Create();
+            // Get All
+            IEnumerable<Product> products = productRepository.GetAll();
+
+            // Replace Observable Collection
+            Products.ReplaceWith(products);
+        }
+        #endregion
     }
 }
