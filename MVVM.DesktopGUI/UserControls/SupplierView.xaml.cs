@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,21 +21,36 @@ namespace MVVM.DesktopGUI.UserControls
     /// </summary>
     public partial class SupplierView : UserControl
     {
-        readonly SupplierViewModel supplierViewModel;
+        private readonly SupplierViewModel supplierViewModel;
+        private bool loaded;
 
         public SupplierView()
         {
             InitializeComponent();
 
-            supplierViewModel = new SupplierViewModel();
+            supplierViewModel = DataContext as SupplierViewModel;
         }
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
+            if(!loaded)
+            {
+                await supplierViewModel.Initialize();
 
-            await supplierViewModel.Initialize();
+                loaded = true;
+            }
+        }
 
-            DataContext = supplierViewModel;
+        private void OnSelectionChange(object sender, SelectionChangedEventArgs e)
+        {
+            supplierViewModel.IsEditEnabled = supplierViewModel.SelectedSupplier switch
+            {
+                null => false,
+                _ => true,
+            };
+            supplierViewModel.IsSaveEnabled = false;
+            supplierViewModel.IsTextBoxesReadOnly = true;
+            supplierViewModel.IsNewEnabled = true;
         }
     }
 }

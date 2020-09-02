@@ -7,12 +7,17 @@
         xmlns:views="clr-namespace:MVVM.DesktopGUI.UserControls"
         xmlns:viewModels="clr-namespace:MVVM.DesktopGUI.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        Height="700"
+        Width="520">
 
+    <!--#region Window DataContext -->
     <Window.DataContext>
         <viewModels:MainWindowViewModel />
     </Window.DataContext>
+    <!--#endregion-->
 
+    <!--#region Window Resources -->
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModels:SupplierViewModel}">
             <views:SupplierView />
@@ -22,19 +27,36 @@
             <views:ProductsView />
         </DataTemplate>
     </Window.Resources>
+    <!--#endregion-->
 
+    <!--#region Window Content -->
     <Grid>
+        <!--#region Grid Row Difinitions -->
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
         </Grid.RowDefinitions>
+        <!--#endregion-->
 
-        <Grid x:Name="NavBar">
+        <!--#region Menu Bar -->
+        <Menu Grid.Row="0"
+              Height="20">
+        </Menu>
+        <!--#endregion-->
+
+        <!--#region Navigation Bar -->
+        <Grid x:Name="NavBar"
+              Grid.Row="1">
+            <!--#region Grid Column Definitions -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!--#endregion-->
 
+            <!--#region Buttons -->
             <Button Content="Suppliers"
                     Command="{Binding NavCommand}"
                     CommandParameter="suppliers"
@@ -44,13 +66,27 @@
                     Command="{Binding NavCommand}"
                     CommandParameter="products"
                     Grid.Column="1" />
+            <!--#endregion-->
         </Grid>
+        <!--#endregion-->
 
+        <!--#region Main Content -->
         <Grid x:Name="MainContent"
-              Grid.Row="1">
+              Grid.Row="2">
             <ContentControl Content="{Binding CurrentViewModel}" />
         </Grid>
+        <!--#endregion-->
+
+        <!--#region Status Bar -->
+        <Grid x:Name="StatusBar"
+              Grid.Row="3">
+            <StatusBar Height="20">
+
+            </StatusBar>
+        </Grid>
+        <!--#endregion-->
 
     </Grid>
+    <!--#endregion-->
 
 </Window>

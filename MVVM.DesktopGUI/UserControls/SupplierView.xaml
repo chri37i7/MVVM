@@ -7,7 +7,7 @@
              xmlns:viewModel="clr-namespace:MVVM.DesktopGUI.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="450"
-             d:DesignWidth="800"
+             d:DesignWidth="520"
              Loaded="OnLoaded">
 
     <!--#region DataContext -->
@@ -18,6 +18,7 @@
 
     <!--#region Grid Content -->
     <Grid>
+
         <!--#region Grid Columns -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -25,18 +26,213 @@
         </Grid.ColumnDefinitions>
         <!--#endregion-->
 
-        <!--#region ListBox -->
-        <ListBox Grid.Column="0"
-                 ItemsSource="{Binding Suppliers, Mode=OneWay}"
-                 DisplayMemberPath="CompanyName"
-                 SelectedItem="{Binding SelectedSupplier}">
+        <!--#region Master ListBox -->
+        <Grid Grid.Column="0">
 
-        </ListBox>
+            <!--#region Grid Row Difinitions -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <!--#endregion-->
+
+            <!--#region ListBox -->
+            <ListBox Grid.Row="0"
+                     ItemsSource="{Binding Suppliers, Mode=OneWay}"
+                     DisplayMemberPath="CompanyName"
+                     SelectedItem="{Binding SelectedSupplier}"
+                     SelectionChanged="OnSelectionChange">
+
+            </ListBox>
+            <!--#endregion-->
+
+            <!--#region Buttons -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Grid.Row="1">
+                <Button x:Name="button_NewSupplier"
+                        Content="New"
+                        Width="63"
+                        Command="{Binding NewSupplierCommand}"
+                        IsEnabled="{Binding IsNewEnabled}" />
+                <Button x:Name="button_EditSupplier"
+                        Content="Edit"
+                        Width="64"
+                        Margin=" 5,0"
+                        Command="{Binding EditSupplierCommand}"
+                        IsEnabled="{Binding IsEditEnabled}" />
+                <Button x:Name="button_SaveSupplier"
+                        Content="Save"
+                        Width="63"
+                        Command="{Binding SaveSupplierCommand}"
+                        IsEnabled="{Binding IsSaveEnabled}" />
+            </StackPanel>
+            <!--#endregion-->
+
+        </Grid>
         <!--#endregion-->
 
-        <Grid Grid.Column="1">
-            <TextBlock Text="{Binding SelectedSupplier.CompanyName}" />
+        <!--#region Detail Content -->
+        <Grid Grid.Column="1"
+              DataContext="{Binding SelectedSupplier}">
+
+            <!--#region Grid Column Difinitions -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!--#endregion-->
+
+            <!--#region Grid Row Difinitions -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!--#endregion-->
+
+            <!--#region Location Details -->
+            <GroupBox Header="Location Details"
+                      Grid.Column="0"
+                      Grid.Row="0"
+                      Height="auto">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Address: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_Address"
+                                 Text="{Binding Address}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="City: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_City"
+                                 Text="{Binding City}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Postal Code: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_PostalCode"
+                                 Text="{Binding PostalCode}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                    <StackPanel  Orientation="Horizontal">
+                        <Label Content="Country: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_Country"
+                                 Text="{Binding Country}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Region: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_Region"
+                                 Text="{Binding Region}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <!--#endregion-->
+
+            <!--#region Contact Details -->
+            <GroupBox Header="Contact Details"
+                      Grid.Column="0"
+                      Grid.Row="1">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Company: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_CompanyName"
+                                 Text="{Binding CompanyName}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="HomePage: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_HomePage"
+                                 Text="{Binding HomePage}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Phone: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_Phone"
+                                 Text="{Binding Phone}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Fax: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_Fax"
+                                 Text="{Binding Fax}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Contact: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_ContactName"
+                                 Text="{Binding ContactName}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Title: "
+                               Height="25"
+                               Width="100"
+                               Margin="5" />
+                        <TextBox x:Name="textBox_ContactTitle"
+                                 Text="{Binding ContactTitle}"
+                                 Height="20"
+                                 Width="180"
+                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <!--#endregion-->
+
         </Grid>
+        <!--#endregion-->
+
     </Grid>
     <!--#endregion-->
+
 </UserControl>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.DesktopGUI", "MVVM.DesktopGUI\MVVM.DesktopGUI.csproj", "{DA9696D1-13A7-4360-8731-6944149F2CC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.GUI.Desktop", "MVVM.DesktopGUI\MVVM.GUI.Desktop.csproj", "{DA9696D1-13A7-4360-8731-6944149F2CC4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.DataAccess", "MVVM.DataAccess\MVVM.DataAccess.csproj", "{D87F8D2E-7616-4F57-8959-F0727121CAE3}"
 EndProject
@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.Tests", "MVVM.Tests\MV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.Utilities", "MVVM.Utilities\MVVM.Utilities.csproj", "{1C50E10A-6F67-49D6-99BD-C779EE2F6E02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM.Entities", "MVVM.Entities\MVVM.Entities.csproj", "{63E295FB-EC28-4A5B-88F3-A50CB6AF3952}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM.Entities", "MVVM.Entities\MVVM.Entities.csproj", "{63E295FB-EC28-4A5B-88F3-A50CB6AF3952}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

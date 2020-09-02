@@ -82,15 +82,8 @@ namespace MVVM.DesktopGUI.ViewModels
             // Create Repository
             RepositoryBase<Product> productRepository = factory.Create();
 
-            // Declare variable for storing products
-            IEnumerable<Product> products = null;
-
-            // Run GetAll on a seperate thread
-            await Task.Run(() =>
-            {
-                // Get all products from the database
-                products = productRepository.GetAll();
-            });
+            // Get all products from the database
+            IEnumerable<Product> products = await productRepository.GetAllAsync();
 
             // Replace Observable Collection
             Products.ReplaceWith(products);

@@ -20,21 +20,24 @@ namespace MVVM.DesktopGUI.UserControls
     /// </summary>
     public partial class ProductsView : UserControl
     {
-        readonly ProductViewModel productViewModel;
+        private readonly ProductViewModel productViewModel;
+        private bool loaded;
 
         public ProductsView()
         {
             InitializeComponent();
 
-            productViewModel = new ProductViewModel();
+            productViewModel = DataContext as ProductViewModel;
         }
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
+            if(!loaded)
+            {
+                await productViewModel.Initialize();
 
-            await productViewModel.Initialize();
-
-            DataContext = productViewModel;
+                loaded = true;
+            }
         }
     }
 }

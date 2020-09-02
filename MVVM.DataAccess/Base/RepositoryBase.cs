@@ -1,5 +1,10 @@
-﻿using MVVM.DataAccess.Entities.Models;
+﻿using Microsoft.EntityFrameworkCore;
+
+using MVVM.DataAccess.Entities.Models;
+
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MVVM.DataAccess.Base
 {
@@ -35,6 +40,11 @@ namespace MVVM.DataAccess.Base
         public IEnumerable<T> GetAll()
         {
             return context.Set<T>();
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await context.Set<T>().ToListAsync();
         }
 
         public virtual T GetBy(int id)

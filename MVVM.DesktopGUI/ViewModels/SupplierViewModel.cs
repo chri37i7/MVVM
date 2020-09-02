@@ -2,6 +2,7 @@
 using MVVM.DataAccess.Entities.Models;
 using MVVM.DataAccess.Factory;
 using MVVM.DesktopGUI.ViewModels.Base;
+using MVVM.Entities;
 using MVVM.Utilities;
 
 using System.Collections.Generic;
@@ -17,13 +18,32 @@ namespace MVVM.DesktopGUI.ViewModels
         private ObservableCollection<Supplier> suppliers;
         // Selected Supplier
         private Supplier selectedSupplier;
+        // Bool's for boxes, hehe
+        private bool isTextBoxesReadOnly;
+        private bool isNewEnabled;
+        private bool isEditEnabled;
+        private bool isSaveEnabled;
+
         #endregion
 
         #region Constructors
         // Constructor
         public SupplierViewModel()
         {
-            Suppliers = new ObservableCollection<Supplier>();
+            // Initialize Commands
+            NewSupplierCommand = new CommandBase<string>(NewSupplier);
+            EditSupplierCommand = new CommandBase<string>(EditSupplier);
+            SaveSupplierCommand = new CommandBase<string>(SaveSupplier);
+
+            // Initialize suppliers
+            suppliers = new ObservableCollection<Supplier>();
+
+            // Initialize textboxes state field
+            isTextBoxesReadOnly = true;
+            // Initialize button state fields
+            isNewEnabled = true;
+            isEditEnabled = true;
+            isSaveEnabled = false;
         }
         #endregion
 
@@ -32,41 +52,52 @@ namespace MVVM.DesktopGUI.ViewModels
         /// Suppliers displayed in the view
         /// </summary>
         public virtual ObservableCollection<Supplier> Suppliers
-        {
-            get
-            {
-                return suppliers;
-            }
-            set
-            {
-                if(suppliers != value)
-                {
-                    suppliers = value;
-
-                }
-            }
-        }
+        { get { return suppliers; } set { SetProperty(ref suppliers, value); } }
 
         /// <summary>
-        /// The selected supplier in the view
+        /// Selected supplier in the view
         /// </summary>
         public virtual Supplier SelectedSupplier
-        {
-            get
-            {
-                return selectedSupplier;
-            }
-            set
-            {
-                if(selectedSupplier != value)
-                {
-                    selectedSupplier = value;
+        { get { return selectedSupplier; } set { SetProperty(ref selectedSupplier, value); } }
 
-                    // Raise ProperyChanged Event
-                    OnPropertyChanged(nameof(SelectedSupplier));
-                }
-            }
-        }
+        /// <summary>
+        /// Used for controlling the textboxes readonly state
+        /// </summary>
+        public virtual bool IsTextBoxesReadOnly
+        { get { return isTextBoxesReadOnly; } set { SetProperty(ref isTextBoxesReadOnly, value); } }
+
+        /// <summary>
+        /// Used for controlling the edit buttons enabled state
+        /// </summary>
+        public virtual bool IsNewEnabled
+        { get { return isNewEnabled; } set { SetProperty(ref isNewEnabled, value); } }
+
+        /// <summary>
+        /// Used for controlling the edit buttons enabled state
+        /// </summary>
+        public virtual bool IsEditEnabled
+        { get { return isEditEnabled; } set { SetProperty(ref isEditEnabled, value); } }
+
+        /// <summary>
+        /// Used for controlling the save buttons enabled state
+        /// </summary>
+        public virtual bool IsSaveEnabled
+        { get { return isSaveEnabled; } set { SetProperty(ref isSaveEnabled, value); } }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public CommandBase<string> NewSupplierCommand { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public CommandBase<string> EditSupplierCommand { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public CommandBase<string> SaveSupplierCommand { get; private set; }
         #endregion
 
         #region Methods
@@ -82,18 +113,44 @@ namespace MVVM.DesktopGUI.ViewModels
             // Create Repository
             SupplierRepository supplierRepository = factory.Create();
 
-            // Declare variable for storing products
-            IEnumerable<Supplier> suppliers = null;
-
-            // Run GetAll on a seperate thread
-            await Task.Run(() =>
-            {
-                // Get all products from the database
-                suppliers = supplierRepository.GetAll();
-            });
+            // Get all products from the database
+            IEnumerable<Supplier> suppliers = await supplierRepository.GetAllAsync();
 
             // Replace Observable Collection
             Suppliers.ReplaceWith(suppliers);
+        }
+
+        public virtual void EditSupplier(string supplier)
+        {
+            IsNewEnabled = false;
+            IsEditEnabled = false;
+            IsSaveEnabled = true;
+
+            IsTextBoxesReadOnly = false;
+        }
+
+        public virtual void NewSupplier(string supplier)
+        {
+            SelectedSupplier = null;
+
+            IsNewEnabled = false;
+            IsEditEnabled = false;
+            IsSaveEnabled = true;
+
+            IsTextBoxesReadOnly = false;
+        }
+
+        public virtual void SaveSupplier(string fixme)
+        {
+            if(SelectedSupplier is null)
+            {
+                Supplier supplier = new Supplier()
+                {
+
+                };
+
+                Suppliers.Add(supplier);
+            }
         }
         #endregion
     }
