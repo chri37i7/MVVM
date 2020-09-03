@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MVVM.Entities
+namespace MVVM.DataAccess.Entities
 {
     /// <summary>
     /// Base class to encapsulate the implementation of INotifyPropertyChanged for ViewModels.

@@ -38,10 +38,9 @@
 
             <!--#region ListBox -->
             <ListBox Grid.Row="0"
-                     ItemsSource="{Binding Suppliers, Mode=OneWay}"
+                     ItemsSource="{Binding Suppliers}"
                      DisplayMemberPath="CompanyName"
-                     SelectedItem="{Binding SelectedSupplier}"
-                     SelectionChanged="OnSelectionChange">
+                     SelectedItem="{Binding SelectedSupplier}">
 
             </ListBox>
             <!--#endregion-->
@@ -53,19 +52,16 @@
                 <Button x:Name="button_NewSupplier"
                         Content="New"
                         Width="63"
-                        Command="{Binding NewSupplierCommand}"
-                        IsEnabled="{Binding IsNewEnabled}" />
+                        Command="{Binding NewCommand}" />
                 <Button x:Name="button_EditSupplier"
                         Content="Edit"
                         Width="64"
                         Margin=" 5,0"
-                        Command="{Binding EditSupplierCommand}"
-                        IsEnabled="{Binding IsEditEnabled}" />
+                        Command="{Binding SaveCommand}" />
                 <Button x:Name="button_SaveSupplier"
                         Content="Save"
                         Width="63"
-                        Command="{Binding SaveSupplierCommand}"
-                        IsEnabled="{Binding IsSaveEnabled}" />
+                        Command="{Binding SaveCommand}" />
             </StackPanel>
             <!--#endregion-->
 
@@ -74,7 +70,7 @@
 
         <!--#region Detail Content -->
         <Grid Grid.Column="1"
-              DataContext="{Binding SelectedSupplier}">
+              DataContext="{Binding SelectedSupplier, Mode=TwoWay}">
 
             <!--#region Grid Column Difinitions -->
             <Grid.ColumnDefinitions>
@@ -101,7 +97,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_Address"
-                                 Text="{Binding Address}"
+                                 Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />
@@ -112,7 +108,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_City"
-                                 Text="{Binding City}"
+                                 Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />
@@ -123,7 +119,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_PostalCode"
-                                 Text="{Binding PostalCode}"
+                                 Text="{Binding PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />
@@ -134,7 +130,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_Country"
-                                 Text="{Binding Country}"
+                                 Text="{Binding Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />
@@ -145,7 +141,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_Region"
-                                 Text="{Binding Region}"
+                                 Text="{Binding Region, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />
@@ -165,7 +161,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_CompanyName"
-                                 Text="{Binding CompanyName}"
+                                 Text="{Binding CompanyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />
@@ -176,7 +172,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_HomePage"
-                                 Text="{Binding HomePage}"
+                                 Text="{Binding HomePage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />
@@ -187,7 +183,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_Phone"
-                                 Text="{Binding Phone}"
+                                 Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />
@@ -198,7 +194,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_Fax"
-                                 Text="{Binding Fax}"
+                                 Text="{Binding Fax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />
@@ -209,7 +205,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_ContactName"
-                                 Text="{Binding ContactName}"
+                                 Text="{Binding ContactName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />
@@ -220,7 +216,7 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_ContactTitle"
-                                 Text="{Binding ContactTitle}"
+                                 Text="{Binding ContactTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
                                  IsReadOnly="{Binding IsTextBoxesReadOnly}" />

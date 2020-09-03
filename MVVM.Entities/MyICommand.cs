@@ -3,22 +3,17 @@ using System.Windows.Input;
 
 namespace MVVM.Entities
 {
-    /// <summary>
-    /// Base command class implementing the ICommand interface
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class CommandBase<T> : ICommand
+    public class MyICommand : ICommand
     {
+        Action _TargetExecuteMethod;
+        Func<bool> _TargetCanExecuteMethod;
 
-        Action<T> _TargetExecuteMethod;
-        Func<T, bool> _TargetCanExecuteMethod;
-
-        public CommandBase(Action<T> executeMethod)
+        public MyICommand(Action executeMethod)
         {
             _TargetExecuteMethod = executeMethod;
         }
 
-        public CommandBase(Action<T> executeMethod, Func<T, bool> canExecuteMethod)
+        public MyICommand(Action executeMethod, Func<bool> canExecuteMethod)
         {
             _TargetExecuteMethod = executeMethod;
             _TargetCanExecuteMethod = canExecuteMethod;
@@ -29,15 +24,12 @@ namespace MVVM.Entities
             CanExecuteChanged(this, EventArgs.Empty);
         }
 
-        #region ICommand Members
-
         bool ICommand.CanExecute(object parameter)
         {
 
             if(_TargetCanExecuteMethod != null)
             {
-                T tparm = (T)parameter;
-                return _TargetCanExecuteMethod(tparm);
+                return _TargetCanExecuteMethod();
             }
 
             if(_TargetExecuteMethod != null)
@@ -48,16 +40,15 @@ namespace MVVM.Entities
             return false;
         }
 
+
         public event EventHandler CanExecuteChanged = delegate { };
 
         void ICommand.Execute(object parameter)
         {
             if(_TargetExecuteMethod != null)
             {
-                _TargetExecuteMethod((T)parameter);
+                _TargetExecuteMethod();
             }
         }
-
-        #endregion
     }
 }

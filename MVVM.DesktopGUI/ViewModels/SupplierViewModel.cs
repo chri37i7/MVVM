@@ -1,12 +1,16 @@
-﻿using MVVM.DataAccess;
+﻿using Microsoft.Extensions.Logging;
+
+using MVVM.DataAccess;
 using MVVM.DataAccess.Entities.Models;
 using MVVM.DataAccess.Factory;
 using MVVM.DesktopGUI.ViewModels.Base;
 using MVVM.Entities;
 using MVVM.Utilities;
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MVVM.DesktopGUI.ViewModels
@@ -18,12 +22,8 @@ namespace MVVM.DesktopGUI.ViewModels
         private ObservableCollection<Supplier> suppliers;
         // Selected Supplier
         private Supplier selectedSupplier;
-        // Bool's for boxes, hehe
-        private bool isTextBoxesReadOnly;
-        private bool isNewEnabled;
-        private bool isEditEnabled;
-        private bool isSaveEnabled;
-
+        // Edit mode
+        private bool editMode;
         #endregion
 
         #region Constructors
@@ -31,73 +31,87 @@ namespace MVVM.DesktopGUI.ViewModels
         public SupplierViewModel()
         {
             // Initialize Commands
-            NewSupplierCommand = new CommandBase<string>(NewSupplier);
-            EditSupplierCommand = new CommandBase<string>(EditSupplier);
-            SaveSupplierCommand = new CommandBase<string>(SaveSupplier);
+            NewCommand = new CommandBase<string>(NewSupplier);
+            EditCommand = new CommandBase<string>(EditSupplier);
+            SaveCommand = new MyICommand(OnSave, CanSave);
 
             // Initialize suppliers
             suppliers = new ObservableCollection<Supplier>();
-
-            // Initialize textboxes state field
-            isTextBoxesReadOnly = true;
-            // Initialize button state fields
-            isNewEnabled = true;
-            isEditEnabled = true;
-            isSaveEnabled = false;
         }
         #endregion
 
         #region Properties
+
+        #region Suppliers & SelectedSupplier
         /// <summary>
         /// Suppliers displayed in the view
         /// </summary>
         public virtual ObservableCollection<Supplier> Suppliers
-        { get { return suppliers; } set { SetProperty(ref suppliers, value); } }
+        {
+            get
+            {
+                return suppliers;
+            }
+            set
+            {
+                SetProperty(ref suppliers, value);
+            }
+        }
 
         /// <summary>
         /// Selected supplier in the view
         /// </summary>
         public virtual Supplier SelectedSupplier
-        { get { return selectedSupplier; } set { SetProperty(ref selectedSupplier, value); } }
+        {
+            get
+            {
+                return selectedSupplier;
+            }
+            set
+            {
+                SetProperty(ref selectedSupplier, value);
+
+                
+                
+                    SaveCommand.RaiseCanExecuteChanged();
+                
+
+            }
+        }
+        #endregion
 
         /// <summary>
         /// Used for controlling the textboxes readonly state
         /// </summary>
-        public virtual bool IsTextBoxesReadOnly
-        { get { return isTextBoxesReadOnly; } set { SetProperty(ref isTextBoxesReadOnly, value); } }
+        public virtual bool EditMode
+        {
+            get
+            {
+                return editMode;
+            }
+            set
+            {
+                SetProperty(ref editMode, value);
+            }
+        }
 
+        #region Commands
         /// <summary>
-        /// Used for controlling the edit buttons enabled state
+        /// 
         /// </summary>
-        public virtual bool IsNewEnabled
-        { get { return isNewEnabled; } set { SetProperty(ref isNewEnabled, value); } }
-
-        /// <summary>
-        /// Used for controlling the edit buttons enabled state
-        /// </summary>
-        public virtual bool IsEditEnabled
-        { get { return isEditEnabled; } set { SetProperty(ref isEditEnabled, value); } }
-
-        /// <summary>
-        /// Used for controlling the save buttons enabled state
-        /// </summary>
-        public virtual bool IsSaveEnabled
-        { get { return isSaveEnabled; } set { SetProperty(ref isSaveEnabled, value); } }
+        public virtual CommandBase<string> NewCommand { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public CommandBase<string> NewSupplierCommand { get; private set; }
+        public virtual CommandBase<string> EditCommand { get; private set; }
 
         /// <summary>
         /// 
         /// </summary>
-        public CommandBase<string> EditSupplierCommand { get; private set; }
+        public virtual MyICommand SaveCommand { get; private set; }
+        #endregion
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public CommandBase<string> SaveSupplierCommand { get; private set; }
         #endregion
 
         #region Methods
@@ -122,27 +136,19 @@ namespace MVVM.DesktopGUI.ViewModels
 
         public virtual void EditSupplier(string supplier)
         {
-            IsNewEnabled = false;
-            IsEditEnabled = false;
-            IsSaveEnabled = true;
 
-            IsTextBoxesReadOnly = false;
         }
 
         public virtual void NewSupplier(string supplier)
         {
-            SelectedSupplier = null;
+            SelectedSupplier = new Supplier();
 
-            IsNewEnabled = false;
-            IsEditEnabled = false;
-            IsSaveEnabled = true;
 
-            IsTextBoxesReadOnly = false;
         }
 
         public virtual void SaveSupplier(string fixme)
         {
-            if(SelectedSupplier is null)
+            if(SelectedSupplier.SupplierId <= 0)
             {
                 Supplier supplier = new Supplier()
                 {
@@ -153,5 +159,42 @@ namespace MVVM.DesktopGUI.ViewModels
             }
         }
         #endregion
+
+        public event Action Done = delegate { };
+
+        private void OnCancel()
+        {
+            Done();
+        }
+
+        private async void OnSave()
+        {
+            // Create Factory
+            RepositoryFactory<SupplierRepository, Supplier> factory =
+                new RepositoryFactory<SupplierRepository, Supplier>();
+
+            // Create Repository
+            SupplierRepository supplierRepository = factory.Create();
+
+            if(!EditMode)
+            {
+                supplierRepository.Update();
+            }
+            else
+            {
+                supplierRepository.Add(SelectedSupplier);
+            }
+
+            Done();
+        }
+
+        private bool CanSave()
+        {
+            if(selectedSupplier != null)
+            {
+                return !selectedSupplier.HasErrors; 
+            }
+            return false;
+        }
     }
 }

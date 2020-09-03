@@ -1,4 +1,5 @@
-﻿using MVVM.Entities;
+﻿using MVVM.DataAccess.Entities;
+using MVVM.Entities;
 
 using System;
 using System.Threading.Tasks;
