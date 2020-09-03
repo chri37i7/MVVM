@@ -24,6 +24,7 @@ namespace MVVM.DesktopGUI.ViewModels
         private Supplier selectedSupplier;
         // Edit mode
         private bool editMode;
+        private bool isReadOnly = true;
         #endregion
 
         #region Constructors
@@ -71,17 +72,17 @@ namespace MVVM.DesktopGUI.ViewModels
             {
                 SetProperty(ref selectedSupplier, value);
 
-                
-                
-                    SaveCommand.RaiseCanExecuteChanged();
-                
+
+
+                SaveCommand.RaiseCanExecuteChanged();
+
 
             }
         }
         #endregion
 
         /// <summary>
-        /// Used for controlling the textboxes readonly state
+        /// 
         /// </summary>
         public virtual bool EditMode
         {
@@ -92,6 +93,21 @@ namespace MVVM.DesktopGUI.ViewModels
             set
             {
                 SetProperty(ref editMode, value);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual bool IsReadOnly
+        {
+            get
+            {
+                return isReadOnly;
+            }
+            set
+            {
+                SetProperty(ref isReadOnly, value);
             }
         }
 
@@ -192,7 +208,7 @@ namespace MVVM.DesktopGUI.ViewModels
         {
             if(selectedSupplier != null)
             {
-                return !selectedSupplier.HasErrors; 
+                return !selectedSupplier.HasErrors;
             }
             return false;
         }

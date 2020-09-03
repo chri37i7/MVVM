@@ -69,8 +69,7 @@
         <!--#endregion-->
 
         <!--#region Detail Content -->
-        <Grid Grid.Column="1"
-              DataContext="{Binding SelectedSupplier, Mode=TwoWay}">
+        <Grid Grid.Column="1">
 
             <!--#region Grid Column Difinitions -->
             <Grid.ColumnDefinitions>
@@ -97,10 +96,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_Address"
-                                 Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="City: "
@@ -108,10 +107,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_City"
-                                 Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Postal Code: "
@@ -119,10 +118,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_PostalCode"
-                                 Text="{Binding PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                     <StackPanel  Orientation="Horizontal">
                         <Label Content="Country: "
@@ -130,10 +129,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_Country"
-                                 Text="{Binding Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Region: "
@@ -141,10 +140,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_Region"
-                                 Text="{Binding Region, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.Region, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
@@ -161,10 +160,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_CompanyName"
-                                 Text="{Binding CompanyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.CompanyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="HomePage: "
@@ -172,10 +171,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_HomePage"
-                                 Text="{Binding HomePage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.HomePage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Phone: "
@@ -183,10 +182,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_Phone"
-                                 Text="{Binding Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.Phone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Fax: "
@@ -194,10 +193,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_Fax"
-                                 Text="{Binding Fax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.Fax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Contact: "
@@ -205,10 +204,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_ContactName"
-                                 Text="{Binding ContactName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.ContactName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Title: "
@@ -216,10 +215,10 @@
                                Width="100"
                                Margin="5" />
                         <TextBox x:Name="textBox_ContactTitle"
-                                 Text="{Binding ContactTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Text="{Binding SelectedSupplier.ContactTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                  Height="20"
                                  Width="180"
-                                 IsReadOnly="{Binding IsTextBoxesReadOnly}" />
+                                 IsReadOnly="{Binding IsReadOnly}" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
